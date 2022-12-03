@@ -1,5 +1,16 @@
 from messages import *
 import os
+import time
+
+
+def isUserReading(error = ""):
+  printTitle("Welcome to python/mysql cli :)")
+  if error: printSuccess(error)
+  response = input("Would you like to (r)ead, or (w)rite? ")
+  if response == "r": return True
+  elif response == "w": return False
+  else:
+    return isUserReading("Only (r), or (w) are accepted!")
 
 def getUserAction():
   response = input("")

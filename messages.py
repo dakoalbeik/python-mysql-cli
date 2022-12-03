@@ -98,10 +98,10 @@ def printError(error):
     print(f"{COLOR.RED}{error}{COLOR.BASE}")
 
 MAIN_MENU_ITEMS = [
-    {"name": "applicant", "getData": getApplicantInfo, "sql": sql.insertApplicant},
-    {"name": "resident", "getData": getResidentInfo, "sql": sql.insertResident},
-    {"name": "apartment", "getData": getApartmentInfo, "sql": sql.insertApartment},
-    {"name": "maintenence order", "getData": getMaintenenceOrdersInfo, "sql": sql.insertMaintenenceOrder},
-    {"name": "pet", "getData": getPetInfo, "sql": sql.insertPet},
-    {"name": "application", "getData": getApplicationInfo, "sql": sql.insertApplication}
+    {"name": "applicant", "getData": getApplicantInfo, "sql": sql.insertApplicant, "tableName": "applicants"},
+    {"name": "resident", "getData": getResidentInfo, "sql": sql.insertResident, "tableName": "residents"},
+    {"name": "apartment", "getData": getApartmentInfo, "sql": sql.insertApartment, "tableName": "apartments"},
+    {"name": "maintenence order", "getData": getMaintenenceOrdersInfo, "sql": sql.insertMaintenenceOrder, "tableName": "maintenence_orders"},
+    {"name": "pet", "getData": getPetInfo, "sql": sql.insertPet, "tableName": "pets"},
+    {"name": "application", "getData": getApplicationInfo, "sql": sql.insertApplication, "tableName": "applications"}
 ]
