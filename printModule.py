@@ -96,6 +96,10 @@ def printSuccess(msg):
   print(f"{COLOR.YELLOW}{msg}{COLOR.BASE}")
 
 def printTable(cursor, results):    
+
+    # copied and modified from stackoverflow.com
+    # https://stackoverflow.com/questions/10865483/print-results-in-mysql-format-with-python
+    
     widths = []
     columns = []
     tavnit = '|'
