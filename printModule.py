@@ -1,6 +1,34 @@
 from messages import *
+import mysql.connector
 import os
 import time
+
+
+def readTable(db, cursor, index):
+  tableName = MAIN_MENU_ITEMS[index]["tableName"]
+  sql = f"SELECT * from {tableName}"
+  try:
+    cursor.execute(sql)
+    db.commit()
+    printTable(cursor, cursor.fetchall())
+  except mysql.connector.Error as err:
+    printError("Error occured while reading data! Please try again")
+    printError(err)
+    
+  input("Press 'Enter' to continue...")
+
+def writeTable(db, cursor, index):
+  # get the user input based on the selected table name
+  data = MAIN_MENU_ITEMS[index]["getData"]()
+  try:
+    insertIntoTable(cursor, index, data)
+    db.commit()
+    printSuccess("Record inserted successfully!")
+    time.sleep(2)
+  except mysql.connector.Error as err:
+    printError("Error occured while saving data! Please try again")
+    printError(err)
+    input("Press 'Enter' to continue...")
 
 
 def isUserReading(error = ""):
@@ -66,3 +94,29 @@ def printTitle(string):
 
 def printSuccess(msg):
   print(f"{COLOR.YELLOW}{msg}{COLOR.BASE}")
+
+def printTable(cursor, results):    
+    widths = []
+    columns = []
+    tavnit = '|'
+    separator = '+' 
+    
+    maxValues = [0] * len(results[0])
+    for row in results:
+        for j, column in enumerate(row):
+            maxValues[j] = max(maxValues[j], len(str(column)))
+
+    for i, cd in enumerate(cursor.description):
+        widths.append(max(maxValues[i], len(cd[0])))
+        columns.append(cd[0])
+
+    for w in widths:
+        tavnit += ' %-'+'%ss |' % (w,)
+        separator += '-'*w + '--+'
+
+    print(f'\n{separator}')
+    print(tavnit % tuple(columns))
+    print(separator)
+    for row in results:
+        print(tavnit % row)
+    print(separator)
