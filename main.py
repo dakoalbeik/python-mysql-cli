@@ -1,6 +1,5 @@
 import mysql.connector
 import time
-from sql import *
 from printModule import *
 
 
